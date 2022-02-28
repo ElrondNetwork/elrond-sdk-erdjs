@@ -1,5 +1,6 @@
 import TransportWebUSB from "@ledgerhq/hw-transport-webusb";
 import TransportWebHID from "@ledgerhq/hw-transport-webhid";
+import TransportNodeHID from "@ledgerhq/hw-transport-node-hid";
 import TransportU2f from "@ledgerhq/hw-transport-u2f";
 // @ts-ignore
 import AppElrond from "@elrondnetwork/hw-app-elrond";
@@ -41,6 +42,15 @@ export class HWProvider implements IHWProvider {
     }
 
     async getTransport(): Promise<Transport<Descriptor>> {
+
+        if (process?.versions?.node !== undefined &&
+            process?.release?.name === 'node') {
+            let nodeHIDSupported = await TransportNodeHID.isSupported();
+            if (nodeHIDSupported) {
+                return await TransportNodeHID.open("");
+            }
+        }
+
         let webUSBSupported = await TransportWebUSB.isSupported();
         webUSBSupported =
           webUSBSupported &&

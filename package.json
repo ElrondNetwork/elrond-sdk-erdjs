@@ -33,6 +33,7 @@
     "@babel/runtime": "7.11.2",
     "@elrondnetwork/bls-wasm": "0.3.3",
     "@elrondnetwork/hw-app-elrond": "0.3.2",
+    "@ledgerhq/hw-transport-node-hid": "^6.24.1",
     "@ledgerhq/hw-transport-u2f": "^5.36.0-deprecated",
     "@ledgerhq/hw-transport-webhid": "^6.11.2",
     "@ledgerhq/hw-transport-webusb": "6.11.2",
