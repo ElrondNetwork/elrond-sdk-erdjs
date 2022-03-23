@@ -129,6 +129,22 @@ describe("test transaction construction", async () => {
         assert.isFalse(result.toString().includes("options"));
     });
 
+    it("test sign using hash", async () => {
+        let transaction = new Transaction({
+            nonce: new Nonce(89),
+            value: Balance.Zero(),
+            receiver: wallets.bob.address,
+            gasPrice: GasPrice.min(),
+            gasLimit: GasLimit.min(),
+            chainID: new ChainID("integration tests chain ID"),
+            version: TransactionVersion.withTxHashSignVersion(),
+            options: TransactionOptions.withTxHashSignOptions()
+        });
+
+        await wallets.alice.signer.sign(transaction);
+        assert.equal("f0c81f2393b1ec5972c813f817bae8daa00ade91c6f75ea604ab6a4d2797aca4378d783023ff98f1a02717fe4f24240cdfba0b674ee9abb18042203d713bc70a", transaction.getSignature().hex());
+    });
+
     it("computes correct fee", () => {
         let transaction = new Transaction({
             nonce: new Nonce(92),

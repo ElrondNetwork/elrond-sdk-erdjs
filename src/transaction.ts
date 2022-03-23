@@ -21,6 +21,7 @@ import { ProtoSerializer } from "./proto";
 import { TransactionOnNetwork } from "./transactionOnNetwork";
 import { Hash } from "./hash";
 
+const createKeccakHash = require("keccak");
 const createTransactionHasher = require("blake2b");
 const TRANSACTION_HASH_LENGTH = 32;
 
@@ -256,6 +257,10 @@ export class Transaction implements ISignable {
    * @param signedBy The address of the future signer
    */
   serializeForSigning(signedBy: Address): Buffer {
+    if(this.options.valueOf() == TransactionOptions.withTxHashSignOptions().valueOf() && this.version.valueOf() == TransactionVersion.withTxHashSignVersion().valueOf()) {
+      return this.computeHashForSigning(signedBy);
+    }
+
     // TODO: for appropriate tx.version, interpret tx.options accordingly and sign using the content / data hash
     let plain = this.toPlainObject(signedBy);
     // Make sure we never sign the transaction with another signature set up (useful when using the same method for verification)
@@ -265,6 +270,17 @@ export class Transaction implements ISignable {
     let serialized = JSON.stringify(plain);
 
     return Buffer.from(serialized);
+  }
+
+  computeHashForSigning(signedBy: Address): Buffer {
+    const plain = this.toPlainObject(signedBy);
+    if (plain.signature) {
+      delete plain.signature;
+    }
+
+    const signableMessage = Buffer.from(JSON.stringify(plain));
+
+    return createKeccakHash("keccak256").update(signableMessage).digest();
   }
 
   /**
