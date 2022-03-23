@@ -157,10 +157,15 @@ export class WalletConnectProvider implements IDappProvider {
         }
 
         const address = await this.getAddress();
-        const sig = await this.walletConnector.sendCustomRequest({
+        let sig = await this.walletConnector.sendCustomRequest({
             method: "erd_sign",
             params: this.prepareWalletConnectMessage(transaction, address)
         });
+
+        if (Array.isArray(sig) && sig.length > 0) {
+            sig = sig[0]
+        }
+
         if (!sig || !sig.signature) {
             Logger.error("signTransaction: Wallet Connect could not sign the transaction");
             throw new Error("Wallet Connect could not sign the transaction");
