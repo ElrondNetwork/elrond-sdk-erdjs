@@ -11,13 +11,13 @@ export class AbiRegistry {
     readonly interfaces: ContractInterface[] = [];
     readonly customTypes: CustomType[] = [];
 
-    static create(json: { name: string; endpoints: any[]; types: any[] }): AbiRegistry {
+    static create(json: { name: string; endpoints: any[]; types: Record<string, any> }): AbiRegistry {
         let registry = new AbiRegistry().extend(json);
         let remappedRegistry = registry.remapToKnownTypes();
         return remappedRegistry;
     }
 
-    private extend(json: { name: string; endpoints: any[]; types: any[] }): AbiRegistry {
+    private extend(json: { name: string; endpoints: any[]; types: Record<string, any> }): AbiRegistry {
         json.types = json.types || {};
 
         // The "endpoints" collection is interpreted by "ContractInterface".
