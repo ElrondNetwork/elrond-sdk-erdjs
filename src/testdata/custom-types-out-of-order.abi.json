@@ -22,6 +22,15 @@
                 }
             ]
         },
+        "TypeC": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "foobar",
+                    "type": "u64"
+                }
+            ]
+        },
         "EsdtTokenType": {
             "type": "enum",
             "variants": [
@@ -35,15 +44,6 @@
                 }
             ]
         },
-        "TypeA": {
-            "type": "struct",
-            "fields": [
-                {
-                    "name": "b",
-                    "type": "TypeB"
-                }
-            ]
-        },
         "TypeB": {
             "type": "struct",
             "fields": [
@@ -53,12 +53,12 @@
                 }
             ]
         },
-        "TypeC": {
+        "TypeA": {
             "type": "struct",
             "fields": [
                 {
-                    "name": "foobar",
-                    "type": "u64"
+                    "name": "b",
+                    "type": "TypeB"
                 }
             ]
         }
