@@ -246,7 +246,7 @@ export class Transaction {
       receiver: Address.fromString(plainObjectTransaction.receiver),
       gasPrice: Number(plainObjectTransaction.gasPrice),
       gasLimit: Number(plainObjectTransaction.gasLimit),
-      data: new TransactionPayload(atob(plainObjectTransaction.data || "")),
+      data: new TransactionPayload(Buffer.from(plainObjectTransaction.data || "", "base64")),
       chainID: String(plainObjectTransaction.chainID),
       version: new TransactionVersion(plainObjectTransaction.version),
     });
