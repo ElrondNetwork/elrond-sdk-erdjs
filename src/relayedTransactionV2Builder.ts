@@ -70,6 +70,7 @@ export class RelayedTransactionV2Builder {
             .build();
 
         return new Transaction({
+            sender: this.innerTransaction.getSender(),
             receiver: this.innerTransaction.getSender(),
             value: 0,
             gasLimit:

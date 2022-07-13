@@ -20,6 +20,7 @@ describe("test transaction construction", async () => {
         let transaction = new Transaction({
             nonce: 89,
             value: "0",
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasPrice: minGasPrice,
             gasLimit: minGasLimit,
@@ -35,6 +36,7 @@ describe("test transaction construction", async () => {
         let transaction = new Transaction({
             nonce: 90,
             value: "0",
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasPrice: minGasPrice,
             gasLimit: 80000,
@@ -51,6 +53,7 @@ describe("test transaction construction", async () => {
         let transaction = new Transaction({
             nonce: 89,
             value: "0",
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasPrice: minGasPrice,
             gasLimit: minGasLimit,
@@ -68,6 +71,7 @@ describe("test transaction construction", async () => {
         let transaction = new Transaction({
             nonce: 91,
             value: TokenPayment.egldFromAmount(10),
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasPrice: minGasPrice,
             gasLimit: 100000,
@@ -84,6 +88,7 @@ describe("test transaction construction", async () => {
         let transaction = new Transaction({
             nonce: 92,
             value: TokenPayment.egldFromBigInteger("123456789000000000000000000000"),
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasPrice: minGasPrice,
             gasLimit: 100000,
@@ -100,6 +105,7 @@ describe("test transaction construction", async () => {
         let transaction = new Transaction({
             nonce: 0,
             value: 0,
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasPrice: minGasPrice,
             gasLimit: 80000,
@@ -117,6 +123,7 @@ describe("test transaction construction", async () => {
         let transaction = new Transaction({
             nonce: 89,
             value: 0,
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasPrice: minGasPrice,
             gasLimit: minGasLimit,
@@ -135,6 +142,7 @@ describe("test transaction construction", async () => {
         let transaction = new Transaction({
             nonce: 92,
             value: TokenPayment.egldFromBigInteger("123456789000000000000000000000"),
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasPrice: 500,
             gasLimit: 20,
@@ -156,6 +164,7 @@ describe("test transaction construction", async () => {
         let transaction = new Transaction({
             nonce: 92,
             value: TokenPayment.egldFromBigInteger("123456789000000000000000000000"),
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             data: new TransactionPayload("testdata"),
             gasPrice: 500,
@@ -179,6 +188,7 @@ describe("test transaction construction", async () => {
         const transaction = new Transaction({
             nonce: 90,
             value: new BigNumber("1000000000000000000"),
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasPrice: minGasPrice,
             gasLimit: 80000,

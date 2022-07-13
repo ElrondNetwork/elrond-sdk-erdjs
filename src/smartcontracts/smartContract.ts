@@ -120,6 +120,7 @@ export class SmartContract implements ISmartContract {
 
         let transaction = new Transaction({
             receiver: Address.Zero(),
+            sender: Address.Zero(),
             value: value,
             gasLimit: gasLimit,
             gasPrice: gasPrice,
@@ -147,6 +148,7 @@ export class SmartContract implements ISmartContract {
             .build();
 
         let transaction = new Transaction({
+            sender: Address.Zero(),
             receiver: this.getAddress(),
             value: value,
             gasLimit: gasLimit,
@@ -173,6 +175,7 @@ export class SmartContract implements ISmartContract {
             .build();
 
         let transaction = new Transaction({
+            sender: Address.Zero(),
             receiver: receiver ? receiver : this.getAddress(),
             value: value,
             gasLimit: gasLimit,

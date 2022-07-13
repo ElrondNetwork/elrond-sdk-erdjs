@@ -1,6 +1,7 @@
 import { IAddress, IChainID, IGasLimit, IGasPrice, INonce, ITokenPayment, ITransactionPayload, ITransactionValue } from "./interface";
 import { ESDTNFTTransferPayloadBuilder, ESDTTransferPayloadBuilder, MultiESDTNFTTransferPayloadBuilder } from "./tokenTransferBuilders";
 import { Transaction } from "./transaction";
+import {Address} from "./address";
 
 interface IGasEstimator {
     forEGLDTransfer(dataLength: number): number;
@@ -33,7 +34,7 @@ export class TransactionFactory {
             nonce: args.nonce,
             value: args.value,
             receiver: args.receiver,
-            sender: args.sender,
+            sender: args.sender || Address.Zero(),
             gasPrice: args.gasPrice,
             gasLimit: args.gasLimit || estimatedGasLimit,
             data: args.data,
@@ -60,7 +61,7 @@ export class TransactionFactory {
         return new Transaction({
             nonce: args.nonce,
             receiver: args.receiver,
-            sender: args.sender,
+            sender: args.sender || Address.Zero(),
             gasPrice: args.gasPrice,
             gasLimit: args.gasLimit || estimatedGasLimit,
             data: transactionPayload,

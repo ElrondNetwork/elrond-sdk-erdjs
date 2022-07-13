@@ -20,6 +20,7 @@ describe("serialize transactions", () => {
         let transaction = new Transaction({
             nonce: 89,
             value: 0,
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasLimit: 50000,
             chainID: "local-testnet"
@@ -35,6 +36,7 @@ describe("serialize transactions", () => {
         let transaction = new Transaction({
             nonce: 90,
             value: 0,
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasLimit: 80000,
             data: new TransactionPayload("hello"),
@@ -51,6 +53,7 @@ describe("serialize transactions", () => {
         let transaction = new Transaction({
             nonce: 91,
             value: TokenPayment.egldFromAmount(10),
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasLimit: 100000,
             data: new TransactionPayload("for the book"),
@@ -67,13 +70,14 @@ describe("serialize transactions", () => {
         let transaction = new Transaction({
             nonce: 92,
             value: new BigNumber("123456789000000000000000000000"),
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasLimit: 100000,
             data: new TransactionPayload("for the spaceship"),
             chainID: "local-testnet"
         });
 
-        transaction.applySignature(new Signature("39938d15812708475dfc8125b5d41dbcea0b2e3e7aabbbfceb6ce4f070de3033676a218b73facd88b1432d7d4accab89c6130b3abe5cc7bbbb5146e61d355b03"), wallets.alice.address)
+        transaction.applySignature(new Signature("39938d15812708475dfc8125b5d41dbcea0b2e3e7aabbbfceb6ce4f070de3033676a218b73facd88b1432d7d4accab89c6130b3abe5cc7bbbb5146e61d355b03"), wallets.alice.address);
 
         let buffer = serializer.serializeTransaction(transaction);
         assert.equal(buffer.toString("hex"), "085c120e00018ee90ff6181f3761632000001a208049d639e5a6980d1cd2392abcce41029cda74a1563523a202f09641cc2618f82a200139472eff6886771a982f3083da5d421f24c29181e63888228dc81ca60d69e1388094ebdc0340a08d064a11666f722074686520737061636573686970520d6c6f63616c2d746573746e65745801624039938d15812708475dfc8125b5d41dbcea0b2e3e7aabbbfceb6ce4f070de3033676a218b73facd88b1432d7d4accab89c6130b3abe5cc7bbbb5146e61d355b03");
@@ -83,6 +87,7 @@ describe("serialize transactions", () => {
         let transaction = new Transaction({
             nonce: 0,
             value: new BigNumber("0"),
+            sender: wallets.alice.address,
             receiver: wallets.bob.address,
             gasLimit: 80000,
             data: new TransactionPayload("hello"),
