@@ -23,10 +23,7 @@ export class Address {
     /**
      * Creates an address object, given a raw string (whether a hex pubkey or a Bech32 address), a sequence of bytes, or another Address object.
      */
-    public constructor(value?: Address | Buffer | string) {
-        if (!value) {
-            return;
-        }
+    public constructor(value: Address | Buffer | string) {
         if (value instanceof Address) {
             return Address.fromAddress(value);
         }
