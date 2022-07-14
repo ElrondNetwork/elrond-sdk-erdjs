@@ -102,33 +102,31 @@ describe("test parser", () => {
             ],
         });
 
-        // TODO: In a future PR, replace the JSON-based parsing logic with a better one and enable this test,
-        // which currently fails.
 
-        // type = parser.parse("MultiArg<Option<u8>, List<u16>>");
-        // assert.deepEqual(type.toJSON(), {
-        //     "name": "MultiArg",
-        //     "typeParameters": [
-        //         {
-        //             "name": "Option",
-        //             "typeParameters": [
-        //                 {
-        //                     "name": "u8",
-        //                     "typeParameters": []
-        //                 }
-        //             ]
-        //         },
-        //         {
-        //             "name": "List",
-        //             "typeParameters": [
-        //                 {
-        //                     "name": "u16",
-        //                     "typeParameters": []
-        //                 }
-        //             ]
-        //         }
-        //     ]
-        // });
+        type = parser.parse("MultiArg<Option<u8>, List<u16>>");
+        assert.deepEqual(type.toJSON(), {
+            "name": "MultiArg",
+            "typeParameters": [
+                {
+                    "name": "Option",
+                    "typeParameters": [
+                        {
+                            "name": "u8",
+                            "typeParameters": []
+                        }
+                    ]
+                },
+                {
+                    "name": "List",
+                    "typeParameters": [
+                        {
+                            "name": "u16",
+                            "typeParameters": []
+                        }
+                    ]
+                }
+            ]
+        });
     });
 
     it("should parse expression: tuples", () => {
@@ -186,6 +184,31 @@ describe("test parser", () => {
                 {
                     name: "i32",
                     typeParameters: [],
+                },
+            ],
+        });
+
+        type = parser.parse("tuple<List<u64>,List<u64>>");
+        assert.deepEqual(type.toJSON(), {
+            name: "tuple",
+            typeParameters: [
+                {
+                    name: "List",
+                    typeParameters: [
+                        {
+                            name: "u64",
+                            typeParameters: [],
+                        }
+                    ],
+                },
+                {
+                    name: "List",
+                    typeParameters: [
+                        {
+                            name: "u64",
+                            typeParameters: [],
+                        }
+                    ],
                 },
             ],
         });

@@ -57,6 +57,8 @@ export class TypeExpressionParser {
             } else if (char == ",") {
                 if (nextChar == ">") {
                     // Skip superfluous comma
+                } else if (previousChar == ">") {
+                    jsoned += ",";
                 } else {
                     jsoned += ": {},";
                 }
